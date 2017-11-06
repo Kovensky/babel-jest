@@ -13,8 +13,9 @@ import type {CacheKeyOptions, TransformOptions} from 'types/Transform';
 import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
-import jestPreset from 'babel-preset-jest';
-import {transform as babelTransform, util as babelUtil} from 'babel-core';
+// use babel-plugin-jest-hoist directly as babel-preset-jest depends on babel-plugin-transform-object-rest-spread (???)
+import jestPlugin from 'babel-plugin-jest-hoist';
+import {transform as babelTransform, util as babelUtil} from '@babel/core';
 import babelIstanbulPlugin from 'babel-plugin-istanbul';
 
 const BABELRC_FILENAME = '.babelrc';
@@ -68,7 +69,7 @@ const createTransformer = (options: any) => {
 
   options = Object.assign({}, options, {
     plugins: (options && options.plugins) || [],
-    presets: ((options && options.presets) || []).concat([jestPreset]),
+    presets: ((options && options.presets) || []).concat({ plugins: [jestPlugin] }),
     retainLines: true,
     sourceMaps: 'inline',
   });

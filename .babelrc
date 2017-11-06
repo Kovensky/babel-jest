@@ -1,0 +1,11 @@
+{
+  "plugins": [
+    "@babel/transform-flow-strip-types",
+    "@babel/transform-destructuring",
+    "@babel/transform-parameters",
+    "@babel/transform-async-to-generator",
+    "@babel/transform-strict-mode",
+    ["@babel/transform-modules-commonjs", {"allowTopLevelThis": true}]
+  ],
+  "retainLines": true
+}
